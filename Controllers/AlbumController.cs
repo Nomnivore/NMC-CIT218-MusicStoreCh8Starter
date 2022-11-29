@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MusicStore.Models;
-
+using MusicStore.ViewModels;
 
 namespace MusicStore.Controllers
 {
@@ -18,6 +18,16 @@ namespace MusicStore.Controllers
         public AlbumController(MusicContext context)
         {
             _context = context;
+        }
+
+        public IActionResult ArtistView()
+        {
+            var data = new ArtistViewModel
+            {
+                Album = _context.Albums.ToList(),
+                Artist = _context.Artists.ToList(),
+            };
+            return View(data);
         }
 
 
